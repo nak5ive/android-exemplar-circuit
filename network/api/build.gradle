@@ -1,0 +1,36 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.metro)
+}
+
+android {
+    namespace 'com.nak5.exemplar.network.api'
+
+    compileSdk {
+        version = release(36) {
+            minorApiLevel = 1
+        }
+    }
+
+    defaultConfig {
+        minSdk 24
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation libs.retrofit
+    implementation libs.retrofit.gson
+    implementation libs.okhttp3.logging.interceptor
+
+    testImplementation libs.junit
+}

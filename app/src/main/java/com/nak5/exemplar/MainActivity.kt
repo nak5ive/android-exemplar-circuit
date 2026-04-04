@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.nak5.exemplar.screens.HomeScreen
-import com.nak5.exemplar.ui.theme.MyTheme
+import com.nak5.exemplar.home.screens.HomeScreen
+import com.nak5.exemplar.theme.MyTheme
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.navstack.rememberSaveableNavStack
