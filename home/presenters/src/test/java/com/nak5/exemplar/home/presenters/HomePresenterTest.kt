@@ -2,9 +2,11 @@ package com.nak5.exemplar.home.presenters
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import assertk.assertions.isInstanceOf
 import com.nak5.exemplar.home.screens.DetailScreen
 import com.nak5.exemplar.home.screens.HomeScreen
 import com.nak5.exemplar.home.uistate.HomeUiEvent
+import com.nak5.exemplar.home.uistate.HomeUiState
 import com.nak5.exemplar.network.FakeNetworkService
 import com.nak5.exemplar.network.data.Repo
 import com.slack.circuit.test.FakeNavigator
@@ -27,20 +29,26 @@ class HomePresenterTest {
     @Test
     fun `default model`() = runTest {
         makePresenter().test {
-            assertThat(awaitItem().items).isEqualTo(emptyList())
+            assertThat(awaitItem()).isEqualTo(HomeUiState.Loading)
 
             service.repos.send(REPOS)
-            assertThat(awaitItem().items).isEqualTo(listOf("Repo1", "Repo2", "Repo3"))
+            assertThat(awaitItem()).isInstanceOf<HomeUiState.Loaded>().given {
+                assertThat(it.items).isEqualTo(listOf("Repo1", "Repo2", "Repo3"))
+            }
         }
     }
 
     @Test
     fun `navigates to item`() = runTest {
         makePresenter().test {
-            val state = awaitItem()
-            state.onEvent(HomeUiEvent.OnItemClick("Alice"))
+            awaitItem()
 
-            assertThat(navigator.awaitNextScreen()).isEqualTo(DetailScreen("Alice"))
+            service.repos.send(REPOS)
+            assertThat(awaitItem()).isInstanceOf<HomeUiState.Loaded>().given {
+                it.onEvent(HomeUiEvent.OnItemClick("Repo2"))
+            }
+
+            assertThat(navigator.awaitNextScreen()).isEqualTo(DetailScreen("Repo2"))
         }
     }
 

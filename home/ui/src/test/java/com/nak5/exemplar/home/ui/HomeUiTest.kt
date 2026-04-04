@@ -14,7 +14,6 @@ class HomeUiTest {
         theme = "android:Theme.Material.Light.NoActionBar"
     )
 
-    @Ignore("temporary")
     @Test
     fun preview() {
         paparazzi.snapshot {
