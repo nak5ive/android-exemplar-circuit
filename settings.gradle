@@ -24,10 +24,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "android-exemplar-circuit"
 include ':app'
-//include ':network:api'
-//include ':network:fake'
-//include ':home:presenters'
-//include ':home:screens'
-//include ':home:ui'
-//include ':home:uistate'
-//include ':theme'
