@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp.plugin)
     alias(libs.plugins.hilt)
 }
@@ -39,6 +38,11 @@ android {
         compose true
     }
 
+    // see https://slackhq.github.io/circuit/code-gen/
+    ksp {
+        arg("circuit.codegen.mode", "hilt") // or "kotlin_inject_anvil"
+    }
+
     // see https://slackhq.github.io/circuit/testing/#installation
     testOptions {
         unitTests.returnDefaultValues = true
@@ -54,14 +58,20 @@ dependencies {
     implementation libs.androidx.compose.ui.graphics
     implementation libs.androidx.compose.ui.tooling.preview
     implementation libs.androidx.compose.material3
+
+    // network
+    implementation libs.retrofit
+    implementation libs.retrofit.gson
+    implementation libs.okhttp3.logging.interceptor
+
+    // circuit
     implementation libs.circuit.foundation
+    api libs.circuit.codegen.annotations
+    ksp libs.circuit.codegen
+
+    // di
     implementation libs.hilt.android
     ksp libs.hilt.android.compiler
-
-    implementation project(":home:presenters")
-    implementation project(":home:ui")
-    implementation project(":network:api")
-    implementation project(":theme")
 
     testImplementation libs.assertk
     testImplementation libs.circuit.test

@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
-import com.nak5.exemplar.home.screens.HomeScreen
-import com.nak5.exemplar.theme.MyTheme
+import com.nak5.exemplar.screens.HomeScreen
+import com.nak5.exemplar.ui.theme.MyTheme
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.foundation.CircuitCompositionLocals
 import com.slack.circuit.foundation.NavigableCircuitContent
