@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.metro)
-    alias(libs.plugins.paparazzi)
+    alias(libs.plugins.ksp.plugin)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -43,6 +43,8 @@ dependencies {
     implementation libs.androidx.compose.ui.tooling.preview
     implementation libs.androidx.compose.material3
     implementation libs.circuit.foundation
+    implementation libs.hilt.android
+    ksp libs.hilt.android.compiler
 
     implementation project(":home:screens")
     implementation project(":theme")

@@ -3,17 +3,19 @@ package com.nak5.exemplar.di
 import com.slack.circuit.foundation.Circuit
 import com.slack.circuit.runtime.presenter.Presenter
 import com.slack.circuit.runtime.ui.Ui
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesTo
-import dev.zacsweers.metro.Provides
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-@ContributesTo(AppScope::class)
-interface CircuitProvider {
+@Module
+@InstallIn(SingletonComponent::class)
+object CircuitModule {
     @Provides
     fun provideCircuit(
-        presenterFactories: Set<Presenter.Factory>,
-        uiFactories: Set<Ui.Factory>,
-    ) : Circuit = Circuit.Builder()
+        presenterFactories: Set<@JvmSuppressWildcards Presenter.Factory>,
+        uiFactories: Set<@JvmSuppressWildcards Ui.Factory>,
+    ): Circuit = Circuit.Builder()
         .apply {
             presenterFactories.forEach(::addPresenterFactory)
             uiFactories.forEach(::addUiFactory)

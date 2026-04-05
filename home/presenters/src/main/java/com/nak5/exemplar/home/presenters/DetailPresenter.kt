@@ -5,12 +5,11 @@ import com.nak5.exemplar.home.screens.DetailScreen
 import com.nak5.exemplar.home.uistate.DetailUiState
 import com.slack.circuit.runtime.Navigator
 import com.slack.circuit.runtime.presenter.Presenter
-import dev.zacsweers.metro.Assisted
-import dev.zacsweers.metro.AssistedFactory
-import dev.zacsweers.metro.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
-@AssistedInject
-class DetailPresenter(
+class DetailPresenter @AssistedInject constructor(
     @Assisted private val screen: DetailScreen,
     @Assisted private val navigator: Navigator,
 ) : Presenter<DetailUiState> {

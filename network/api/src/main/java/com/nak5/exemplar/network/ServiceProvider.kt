@@ -1,16 +1,18 @@
 package com.nak5.exemplar.network
 
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesTo
-import dev.zacsweers.metro.Provides
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-@ContributesTo(AppScope::class)
-interface ServiceProvider {
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
     @Provides
     fun providesOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(

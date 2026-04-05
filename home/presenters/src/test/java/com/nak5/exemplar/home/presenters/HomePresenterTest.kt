@@ -29,10 +29,10 @@ class HomePresenterTest {
     @Test
     fun `default model`() = runTest {
         makePresenter().test {
-            assertThat(awaitItem()).isEqualTo(HomeUiState.Loading)
+            assertThat(awaitItem().state).isEqualTo(HomeUiState.Loading)
 
             service.repos.send(REPOS)
-            assertThat(awaitItem()).isInstanceOf<HomeUiState.Loaded>().given {
+            assertThat(awaitItem().state).isInstanceOf<HomeUiState.Loaded>().given {
                 assertThat(it.items).isEqualTo(listOf("Repo1", "Repo2", "Repo3"))
             }
         }
@@ -44,7 +44,10 @@ class HomePresenterTest {
             awaitItem()
 
             service.repos.send(REPOS)
-            assertThat(awaitItem()).isInstanceOf<HomeUiState.Loaded>().given {
+            assertThat(awaitItem()).given {
+                assertThat(it.state).isInstanceOf<HomeUiState.Loaded>()
+
+                // do click
                 it.onEvent(HomeUiEvent.OnItemClick("Repo2"))
             }
 
