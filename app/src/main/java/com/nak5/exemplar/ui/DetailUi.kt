@@ -12,7 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.nak5.exemplar.screens.DetailScreen
 import com.nak5.exemplar.ui.theme.MyTheme
+import com.nak5.exemplar.uistate.DetailUiEvent
 import com.nak5.exemplar.uistate.DetailUiState
+import com.nak5.exemplar.uistate.util.StateHolder
 import com.slack.circuit.codegen.annotations.CircuitInject
 import dagger.hilt.components.SingletonComponent
 
@@ -20,7 +22,7 @@ import dagger.hilt.components.SingletonComponent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailUi(
-    state: DetailUiState,
+    stateHolder: StateHolder<DetailUiState, DetailUiEvent>,
     modifier: Modifier = Modifier,
 ) {
     MyTheme {
@@ -36,7 +38,7 @@ fun DetailUi(
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(state.name)
+                Text(stateHolder.state.name)
             }
         }
     }

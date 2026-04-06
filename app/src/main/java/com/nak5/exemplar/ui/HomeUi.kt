@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nak5.exemplar.screens.HomeScreen
 import com.nak5.exemplar.ui.theme.MyTheme
-import com.nak5.exemplar.uistate.CircuitStateHolder
+import com.nak5.exemplar.uistate.util.StateHolder
 import com.nak5.exemplar.uistate.HomeUiEvent
 import com.nak5.exemplar.uistate.HomeUiState
 import com.slack.circuit.codegen.annotations.CircuitInject
@@ -32,7 +32,7 @@ import dagger.hilt.components.SingletonComponent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeUi(
-    stateHolder: CircuitStateHolder<HomeUiState>,
+    stateHolder: StateHolder<HomeUiState, HomeUiEvent>,
     modifier: Modifier = Modifier,
 ) {
     MyTheme {
@@ -96,7 +96,7 @@ internal fun HomeUiPreview_Loaded() {
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background),
-            stateHolder = CircuitStateHolder(
+            stateHolder = StateHolder(
                 state = HomeUiState.Loaded(
                     items = listOf("Repo1", "Repo2", "Repo3"),
                 ),

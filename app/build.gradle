@@ -6,6 +6,13 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+// see: https://slackhq.github.io/circuit/presenter/#no-compose-ui
+kotlin {
+    compilerOptions {
+        allWarningsAsErrors = true
+    }
+}
+
 android {
     namespace 'com.nak5.exemplar'
     compileSdk {
@@ -38,12 +45,12 @@ android {
         compose true
     }
 
-    // see https://slackhq.github.io/circuit/code-gen/
+    // see: https://slackhq.github.io/circuit/code-gen/
     ksp {
-        arg("circuit.codegen.mode", "hilt") // or "kotlin_inject_anvil"
+        arg("circuit.codegen.mode", "hilt")
     }
 
-    // see https://slackhq.github.io/circuit/testing/#installation
+    // see: https://slackhq.github.io/circuit/testing/#installation
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -59,19 +66,20 @@ dependencies {
     implementation libs.androidx.compose.ui.tooling.preview
     implementation libs.androidx.compose.material3
 
-    // network
-    implementation libs.retrofit
-    implementation libs.retrofit.gson
-    implementation libs.okhttp3.logging.interceptor
-
     // circuit
     implementation libs.circuit.foundation
+    implementation libs.circuit.retained
     api libs.circuit.codegen.annotations
     ksp libs.circuit.codegen
 
     // di
     implementation libs.hilt.android
     ksp libs.hilt.android.compiler
+
+    // network
+    implementation libs.retrofit
+    implementation libs.retrofit.gson
+    implementation libs.okhttp3.logging.interceptor
 
     testImplementation libs.assertk
     testImplementation libs.circuit.test
